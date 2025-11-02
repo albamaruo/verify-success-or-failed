@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>認証完了</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes drawCheck {
+      0% {
+        stroke-dashoffset: 48;
+      }
+
+      100% {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .checkmark {
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      animation: drawCheck 0.8s ease-out forwards;
+      animation-delay: 0.3s;
+    }
+
+    @keyframes rainbowFlow {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .rainbow-box {
+      position: relative;
+      border-radius: 1rem;
+      padding: 3px;
+      padding-top: 0.5rem;
+      background: linear-gradient(270deg, rgb(135, 233, 8), rgb(117, 212, 8), rgb(29, 212, 5), green, rgb(36, 240, 29), rgb(70, 231, 29), rgb(22, 233, 127), rgb(57, 233, 14));
+      background-size: 400% 400%;
+      animation: rainbowFlow 6s linear infinite;
+    }
+
+    .rainbow-box>.content {
+      background: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes iconFadeIn {
+      from {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .animate-iconFadeIn {
+      animation: iconFadeIn 0.6s ease-out both;
+    }
+
+    @keyframes toast-in {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes toast-out {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+    }
+
+    .toast-show {
+      animation: toast-in 0.5s forwards;
+    }
+
+    .toast-hide {
+      animation: toast-out 0.5s forwards;
+    }
+  </style>
+</head>
+<div class="w-screen h-screen bg-gradient-to-tr from-lime-400 to-white-600 overflow-hidden relative">
+  <div class="absolute w-1/2 h-full bg-white opacity-10 rotate-45 animate-pulse-slow"></div>
+  <!-- box st -->
+  <main class="relative z-10 w-full max-w-xl mx-auto top-1/2 transform -translate-y-1/2 p-4">
+    <div class="rainbow-box rounded-2xl shadow-xl">
+      <div class="content">
+        <div class="relative inline-flex items-center justify-center w-28 h-28 mx-auto mb-6 animate-iconFadeIn">
+          <div class="spinning-circle"></div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-40 h-40 text-lime-500" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20 13a8 8 0 11-16 0 8 8 0 018-7.5" />
+
+            <path stroke-linecap="round" class="checkmark" stroke-linejoin="round" d="M8.5 12L11 15.5L18 9" />
+          </svg>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-lime-600 mb-8">認証に成功しました！</h1>
+        <p class="text-gray-600 mb-6">認証が完了しました。全てのチャンネルにアクセスできます（すごい）</p>
+      </div>
+    </div>
+  </main>
+  <!-- box end -->
+  <div id="toast"
+    class="fixed top-2 right-2 max-w-sm py-4 px-4 bg-white rounded-xl border border-gray-200 shadow-sm mb-4 gap-4 flex items-center opacity-0 z-50">
+    <span class="flex-shrink-0">
+      <img src="a.png" alt="Icon" class="w-16 h-16 rounded-full" />
+    </span>
+    <div class="block">
+      <h5 class="font-medium text-gray-900 mb-1">まるおからのメッセージ</h5>
+      <p class="text-sm font-medium text-gray-600">５秒後に自動でページが閉じられますうぃｗ</p>
+    </div>
+  </div>
+
+  <script>
+    const toast = document.getElementById('toast');
+    toast.classList.add('toast-show');
+    setTimeout(() => {
+      toast.classList.remove('toast-show');
+      toast.classList.add('toast-hide');
+    }, 5000);
+    setTimeout(() => {
+      window.close();
+    }, 5000);
+  </script>
+  </body>
+
+</html>
+<style>
+  @keyframes pulse-slow {
+
+    0%,
+    100% {
+      transform: translateX(-100%) rotate(45deg);
+    }
+
+    50% {
+      transform: translateX(100%) rotate(45deg);
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 100s linear infinite;
+  }
+</style>
